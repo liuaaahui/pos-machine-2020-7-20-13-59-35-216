@@ -1,0 +1,47 @@
+function printReceipt
+P:60mins
+D:106mins
+C:The process is not clear and some knowledge points are fuzzy
+A:The context map must be optimized before writing the code. You cannot modify the context map while writing the code
+
+function CreatedItemByBarcodes
+P:2mins
+D:2mins
+C:The requirements are simple and the context map is clear
+A:The task should be broken down and the implementation clear
+
+function MargeAndCountBarcodes
+P:5mins
+D:10mins
+C:I thought a little bit about the implementation and Js advanced syntax is not proficient
+A:should do more practice
+
+function FindValidItemByBarcodes
+P:10mins
+D:10mins
+C:Requirements are clear
+A:The task should be broken down and the implementation clear
+
+function CaculateItems
+P:5mins
+D:10mins
+C:The output is modified according to the following code
+A:should anticipate in advance the use of the various output results
+
+function SubItems
+P:10mins
+D:20mins
+C:Incorrect knowledge of forEach syntax
+A:should learn more Js advanced syntax
+
+function TotalPrice
+P:10mins
+D:20mins
+C:Incorrect knowledge of forEach syntax
+A:should learn more Js advanced syntax
+
+function FormattingPrint
+P:5mins
+D:5mins
+C:The requirements are relatively simple
+A:The task should be broken down and the implementation clear
