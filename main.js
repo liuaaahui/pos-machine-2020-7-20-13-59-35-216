@@ -1,31 +1,31 @@
 function printReceipt(barcodes) {
-    var BarcodeInfo = CreatedItemByBarcodes(barcodes);
-    var totalItems = CaculateItems(BarcodeInfo);
-    var Receipt = FormattingPrint(totalItems);
-    console.log(Receipt);
+    let barcodeInfo = createdItemByBarcodes(barcodes);
+    let totalItems = caculateItems(barcodeInfo);
+    let receipt = formattingPrint(totalItems);
+    console.log(receipt);
 }
 
-function CreatedItemByBarcodes(barcodes){
-    var MargeSameBarcodes = MargeAndCountBarcodes(barcodes);
-    return FindValidItemByBarcodes(MargeSameBarcodes);
+function createdItemByBarcodes(barcodes){
+    var groupByBarcode = groupByBarcodes(barcodes);
+    return findValidItemByBarcodes(groupByBarcode);
 }
 
-function MargeAndCountBarcodes(barcodes){
-    let BarcodeObject = {};
+function groupByBarcodes(barcodes){
+    let barcodeObject = {};
     barcodes.forEach((item)=>{
-        if (item in BarcodeObject){
-            BarcodeObject[item].count++;
+        if (item in barcodeObject){
+            barcodeObject[item].count++;
         } else {
-            BarcodeObject[item]={
+            barcodeObject[item]={
                 goodsInfo:{},
                 count:1
             }
         }
     })
-    return BarcodeObject;
+    return barcodeObject;
 }
 
-function FindValidItemByBarcodes(MargeSameBarcodes){
+function findValidItemByBarcodes(groupByBarcode){
     let allValidItem = [
         {
            barcode: 'ITEM000000',
@@ -58,40 +58,40 @@ function FindValidItemByBarcodes(MargeSameBarcodes){
            price: 4
          }
      ]
-     let BarcodeCollection = Object.keys(MargeSameBarcodes);
-     BarcodeCollection.forEach((Barcodes)=>{
+     let barcodeCollection = Object.keys(groupByBarcode);
+     barcodeCollection.forEach((barcodes)=>{
         allValidItem.forEach((item)=>{
-            if(Barcodes == item.barcode) MargeSameBarcodes[Barcodes].goodsInfo = item;
+            if(barcodes == item.barcode) groupByBarcode[barcodes].goodsInfo = item;
         })
      })
-     return MargeSameBarcodes;
+     return groupByBarcode;
 }
 
-function CaculateItems(BarcodeInfo){
+function caculateItems(barcodeInfo){
     let totalItems = {};
-    totalItems.subItem = SubItems(BarcodeInfo);
-    totalItems.totalPrice = TotalPrice(BarcodeInfo);
+    totalItems.createSubItems = createSubItems(barcodeInfo);
+    totalItems.caculateTotalPrice = caculateTotalPrice(barcodeInfo);
     return totalItems;
 }
 
-function SubItems(BarcodeInfo){
-    let SubItem = '';
-    for(let info in BarcodeInfo){
-        SubItem += `Name: ${BarcodeInfo[info].goodsInfo.name}, Quantity: ${BarcodeInfo[info].count}, Unit price: ${BarcodeInfo[info].goodsInfo.price} (yuan), Subtotal: ${BarcodeInfo[info].count*BarcodeInfo[info].goodsInfo.price} (yuan)\n`;
+function createSubItems(barcodeInfo){
+    let subItem = '';
+    for(let info in barcodeInfo){
+        subItem += `Name: ${barcodeInfo[info].goodsInfo.name}, Quantity: ${barcodeInfo[info].count}, Unit price: ${barcodeInfo[info].goodsInfo.price} (yuan), Subtotal: ${barcodeInfo[info].count*barcodeInfo[info].goodsInfo.price} (yuan)\n`;
     }
-    return SubItem.substring(0,SubItem.length-1);
+    return subItem.substring(0,subItem.length-1);
 }
 
-function TotalPrice(BarcodeInfo){
+function caculateTotalPrice(barcodeInfo){
     let totalPrice = 0;
-    for(let info in BarcodeInfo){
-        totalPrice += BarcodeInfo[info].count*BarcodeInfo[info].goodsInfo.price;
+    for(let info in barcodeInfo){
+        totalPrice += barcodeInfo[info].count*barcodeInfo[info].goodsInfo.price;
     }
     return totalPrice;
 }
 
-function FormattingPrint(totalItems){
-    return '\n'+'***<store earning no money>Receipt ***' + '\n' + totalItems.subItem + '\n----------------------' + '\n' + 'Total: ' + totalItems.totalPrice + ' (yuan)\n' + '**********************';
+function formattingPrint(totalItems){
+    return '\n'+'***<store earning no money>Receipt ***' + '\n' + totalItems.createSubItems + '\n----------------------' + '\n' + 'Total: ' + totalItems.caculateTotalPrice + ' (yuan)\n' + '**********************';
 }
 
 module.exports = {
