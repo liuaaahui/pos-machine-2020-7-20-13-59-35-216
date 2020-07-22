@@ -1,6 +1,6 @@
 function printReceipt
-P:60mins
-D:106mins
+P:10mins
+D:15mins
 C:The process is not clear and some knowledge points are fuzzy
 A:The context map must be optimized before writing the code. You cannot modify the context map while writing the code
 
